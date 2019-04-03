@@ -13,6 +13,7 @@ namespace GraphDesignApp
         public GraphicDesignSize Size { get; set; }
         public DesignPaperQuality PaperQuality { get; set; }
         public ShippingType ShippingType { get; set; }
+        public decimal UnitPrice { get; set; }
 
         #endregion
     }
