@@ -8,7 +8,6 @@ namespace GraphDesignApp
         {
             try
             {
-
                 Console.WriteLine("Create account:");
 
                 Console.WriteLine("Enter Email ID:");
@@ -49,7 +48,6 @@ namespace GraphDesignApp
                 Console.WriteLine("User Input: " + designColor);
 
 
-
                 Console.WriteLine("Choose DesignSize:");
                 var designSizes = Enum.GetNames(typeof(GraphicDesignSize));
                 for (int i = 0; i < designSizes.Length; i++)
@@ -88,8 +86,17 @@ namespace GraphDesignApp
 
                 Console.WriteLine("User Input: " + shippingtype);
 
-                var g1 = ShoppingCart.CreateDesign(designType, designColor, designSize, designQuality, shippingtype);
-                Console.WriteLine($"Type:{g1.DesignType}; Color:{g1.Color}; Size:{g1.Size}; Quality:{g1.PaperQuality}; Shipping:{g1.ShippingType}; Price:{g1.UnitPrice};");
+                Console.Write("Enter Quantity: ");
+                var quantity = int.Parse(Console.ReadLine());
+
+                Console.WriteLine("User Input: " + quantity);
+
+                var designs = ShoppingCart.CreateDesign(
+                    designType, designColor, designSize, designQuality, shippingtype, quantity);
+                foreach (var g1 in designs)
+                {
+                    Console.WriteLine($"Type:{g1.DesignType}; Color:{g1.Color}; Size:{g1.Size}; Quality:{g1.PaperQuality}; Shipping:{g1.ShippingType}; Price:{g1.UnitPrice};");
+                }
             }
             catch (Exception ex)
             {

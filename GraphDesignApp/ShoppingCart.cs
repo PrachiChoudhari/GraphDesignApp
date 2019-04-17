@@ -6,41 +6,49 @@ namespace GraphDesignApp
 {
     static class ShoppingCart
     {
-        public static GraphicDesign CreateDesign(
+        public static List<GraphicDesign> CreateDesign(
             GraphicDesignType designType, 
             GraphicDesignColor color,
             GraphicDesignSize size, 
             DesignPaperQuality quality,
-            ShippingType shippingType)
+            ShippingType shippingType,
+            int quantity)
         {
-            var g1 = new GraphicDesign
+            var results = new List<GraphicDesign>();
+
+            for (int i = 0; i < quantity; i++)
             {
-                Color = color,
-                DesignType = designType,
-                PaperQuality = quality,
-                ShippingType = shippingType,
-                Size = size
-            };
+                var g1 = new GraphicDesign
+                {
+                    Color = color,
+                    DesignType = designType,
+                    PaperQuality = quality,
+                    ShippingType = shippingType,
+                    Size = size
+                };
 
-            switch (g1.DesignType)
-            {
-                case GraphicDesignType.Flyer:
-                    g1.UnitPrice = 5;
-                    break;
+                switch (g1.DesignType)
+                {
+                    case GraphicDesignType.Flyer:
+                        g1.UnitPrice = 5;
+                        break;
 
-                case GraphicDesignType.InvitationCard:
-                    g1.UnitPrice = 7;
-                    break;
+                    case GraphicDesignType.InvitationCard:
+                        g1.UnitPrice = 7;
+                        break;
 
-                case GraphicDesignType.SocialMediaFlyer:
-                    g1.UnitPrice = 4;
-                    break;
+                    case GraphicDesignType.SocialMediaFlyer:
+                        g1.UnitPrice = 4;
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
+
+                results.Add(g1);
             }
 
-            return g1;
+            return results;
         }
 
         public static UserAccount CreateUser(
