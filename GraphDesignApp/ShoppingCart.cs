@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace GraphDesignApp
 {
     static class ShoppingCart
     {
-        public static List<GraphicDesign> CreateDesign(
+        private static GraphicDesignContext db = new GraphicDesignContext();
+
+        public static List<GraphicDesign> CreateDesigns(
             GraphicDesignType designType, 
             GraphicDesignColor color,
             GraphicDesignSize size, 
             DesignPaperQuality quality,
             ShippingType shippingType,
-            int quantity)
+            int quantity,
+            string email)
         {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                throw new ArgumentNullException("emailAddress", "Email Address is required!");
+            }
+
+            var userAccount = GetUserAccountByEmail(email);
+            if (userAccount == null)
+            {
+                throw new ArgumentNullException("emailAddress", "Email Address is invalid!");
+            }
+
             var results = new List<GraphicDesign>();
 
             for (int i = 0; i < quantity; i++)
@@ -24,7 +39,8 @@ namespace GraphDesignApp
                     DesignType = designType,
                     PaperQuality = quality,
                     ShippingType = shippingType,
-                    Size = size
+                    Size = size,
+                    EmailAddress = email
                 };
 
                 switch (g1.DesignType)
@@ -48,7 +64,29 @@ namespace GraphDesignApp
                 results.Add(g1);
             }
 
+            foreach (var result in results)
+            {
+                db.Add(result);
+            }
+
+            db.SaveChanges();
+
             return results;
+        }
+
+        public static List<UserAccount> GetAllUserAccounts()
+        {
+            return db.UserAccounts.ToList();
+        }
+
+        public static UserAccount GetUserAccountByEmail(string emailAddress)
+        {
+            return db.UserAccounts.SingleOrDefault(a => a.EmailAddress == emailAddress);
+        }
+
+        public static List<GraphicDesign> GetGraphicDesignsByUser(string emailAddress)
+        {
+            return db.GraphicDesigns.Where(a => a.EmailAddress == emailAddress).ToList();
         }
 
         public static UserAccount CreateUser(
@@ -56,13 +94,30 @@ namespace GraphDesignApp
             string email,
             string phoneNumber)
         {
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                throw new ArgumentNullException("emailAddress", "Email Address is required!");
+            }
+
+            if (string.IsNullOrWhiteSpace(phoneNumber))
+            {
+                throw new ArgumentNullException("phoneNumber", "Phone Number is required!");
+            }
+
+            if (string.IsNullOrWhiteSpace(address))
+            {
+                throw new ArgumentNullException("address", "Address is required!");
+            }
+
             var u1 = new UserAccount
             {
-                
                 Address = address,
                 EmailAddress = email,
                 PhoneNumber = phoneNumber
             };
+
+            db.Add(u1);
+            db.SaveChanges();
 
             return u1;
         }
