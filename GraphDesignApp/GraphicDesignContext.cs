@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GraphDesignApp
 {
-    class GraphicDesignContext : DbContext
+    public class GraphicDesignContext : DbContext
     {
         public DbSet<UserAccount> UserAccounts { get; set; }
         public DbSet<GraphicDesign> GraphicDesigns { get; set; }

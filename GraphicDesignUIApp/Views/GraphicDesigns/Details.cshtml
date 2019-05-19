@@ -1,0 +1,60 @@
+﻿@model GraphDesignApp.GraphicDesign
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GraphicDesign</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DesignType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DesignType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Color)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Color)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperQuality)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PaperQuality)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ShippingType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ShippingType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UnitPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.User)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.User.EmailAddress)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.GraphicDesignId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

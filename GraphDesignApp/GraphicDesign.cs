@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace GraphDesignApp
 {
-    class GraphicDesign
+    public class GraphicDesign
     {
         #region Properties
 
@@ -24,39 +25,59 @@ namespace GraphDesignApp
 
     public enum GraphicDesignType
     {
+        [Display(Name = "Flyer")]
         Flyer,
+
+        [Display(Name = "Invitation Card")]
         InvitationCard,
+
+        [Display(Name = "Social Media Flyer")]
         SocialMediaFlyer,
     }
 
     public enum GraphicDesignColor
     {
+        [Display(Name = "Red")]
         Red,
+        [Display(Name = "Blue")]
         Blue,
-        Green,       
+        [Display(Name = "Green")]
+        Green,
+        [Display(Name = "Yellow")]
         Yellow,
+        [Display(Name = "Orange")]
         Orange,
     }
 
     public enum GraphicDesignSize
     {
+        [Display(Name = "Large")]
         Large,
+        [Display(Name = "Medium")]
         Medium,
+        [Display(Name = "Small")]
         Small,
+        [Display(Name = "ExtraSmall")]
         ExtraSmall,
     }
     
     public enum DesignPaperQuality
     {
+        [Display(Name = "Matte")]
         Matte,
+        [Display(Name = "Glossy")]
         Glossy,
+        [Display(Name = "Regular")]
         Regular,
+        [Display(Name = "Card")]
         Card,
     }
 
     public enum ShippingType
     {
+        [Display(Name = "Delivery")]
         Delivery,
+        [Display(Name = "PickUp")]
         PickUp,
     }
 }

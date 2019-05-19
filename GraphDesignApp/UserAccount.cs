@@ -4,7 +4,7 @@ using System.Text;
 
 namespace GraphDesignApp
 {
-    class UserAccount
+    public class UserAccount
     {
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }

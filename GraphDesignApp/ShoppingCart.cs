@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace GraphDesignApp
 {
-    static class ShoppingCart
+    public static class ShoppingCart
     {
         private static GraphicDesignContext db = new GraphicDesignContext();
 
@@ -86,7 +87,8 @@ namespace GraphDesignApp
 
         public static List<GraphicDesign> GetGraphicDesignsByUser(string emailAddress)
         {
-            return db.GraphicDesigns.Where(a => a.EmailAddress == emailAddress).ToList();
+            var designs = db.GraphicDesigns.Include(x => x.User).Where(a => a.EmailAddress == emailAddress).ToList();
+            return designs;
         }
 
         public static UserAccount CreateUser(
